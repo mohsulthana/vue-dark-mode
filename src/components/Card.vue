@@ -1,5 +1,5 @@
 <template>
-  <div :class="[mode, card]">
+  <div class="card">
     <h6>Time</h6>
     <!-- new line -->
     <div class="team-1">
@@ -16,21 +16,6 @@
 <script>
 export default {
   props: ['cardMode'],
-  data () {
-    return {
-      mode: 'card',
-      card: 'card-light'
-    }
-  },
-  watch: {
-    cardMode: function(newVal) {
-      if (newVal === 'dark') {
-        this.card = 'card-dark'
-      } else {
-        this.card = 'card-light'
-      }
-    }
-  },
 }
 </script>
 
@@ -39,14 +24,10 @@ export default {
   height: 100%;
   width: 150px;
   padding: .5em;
-}
-.card-light {
-  background: #ffffff !important;
   color: #192734 !important;
 }
 .card-dark{
   background: #192734 !important;
-  color: #f3f3f3 !important;
   border: 1px solid white !important;
 }
 .team-1 img, .team-2 img {

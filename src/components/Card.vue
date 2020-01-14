@@ -22,9 +22,10 @@ export default {
 <style>
 .card {
   height: 100%;
-  width: 150px;
+  width: 190px;
   padding: .5em;
   color: #192734 !important;
+  border-radius: 0px !important;
 }
 .card-dark{
   background: #192734 !important;

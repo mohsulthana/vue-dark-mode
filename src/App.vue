@@ -1,6 +1,9 @@
 <template>
   <div class="app" :class="mode">
     <div class="scrolling-wrapper">
+        <button @click="scroll_left" class="left-paddle paddle hidden">
+          <img src="https://image.flaticon.com/icons/svg/271/271220.svg" height="40" width="40" alt="">
+        </button>
       <Select />
       <Select />
         <Card :cardMode="card-dark"/>
@@ -18,7 +21,7 @@
         <Card />
         <Card />
         <button @click="scroll_right" class="right-paddle paddle">
-          <img src="https://previews.123rf.com/images/eljanstock/eljanstock1811/eljanstock181109222/111703684-right-arrow-vector-icon-isolated-on-transparent-background-right-arrow-transparency-logo-concept.jpg" height="40" width="40" alt="">
+          <img src="https://image.flaticon.com/icons/svg/271/271228.svg" height="40" width="40" alt="">
         </button>
         <button class="scoreboard-btn">FULL SCOREBOARD</button>
     </div>
@@ -46,10 +49,21 @@ export default {
     Select,
     Toggle
   },
+  // mounted () {
+  //   let content = document.querySelector(".scrolling-wrapper");
+  // },
   created () {
     window.addEventListener('keyup', this.keyPress)
   },
+  mounted () {
+    window.addEventListener('scroll', this.onScoll)
+  },
   methods: {
+    onScroll (event) {
+      let content = document.querySelector(".scrolling-wrapper");
+      console.log(content.scrollLeft)
+      console.log(event + 'e')
+    },
     keyPress (e) {
       if (e.key === 't') {
         this.toggle()
@@ -58,10 +72,21 @@ export default {
     scroll_left () {
       let content = document.querySelector(".scrolling-wrapper");
       content.scrollLeft -= 50;
+      if (content.scrollLeft == 0) {
+        document.querySelector(".left-paddle").classList.add('hidden')
+      } else{
+        document.querySelector(".left-paddle").classList.remove('hidden');
+      }
     },
     scroll_right () {
       let content = document.querySelector(".scrolling-wrapper");
       content.scrollLeft += 50;
+      if(content.scrollLeft > 0) {
+        document.querySelector(".left-paddle").classList.remove('hidden')
+      } else {
+        document.querySelector(".left-paddle").classList.add('hidden');
+      }
+      console.log(content.scrollLeft)
     },
     toggle () {
       if (this.mode === "dark") {
@@ -94,11 +119,14 @@ export default {
 }
 .scrolling-wrapper {
   display: flex;
-  overflow-x: auto;
-  overflow-y: hidden;
-  height: 130px;
+  overflow: auto;
+  height: 150px;
   position: relative;
   -webkit-overflow-scrolling: touch;
+}
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
 }
 .scoreboard-btn {  
   position: sticky;
@@ -118,6 +146,10 @@ export default {
 }
 .left-paddle {
 	left: 0;
+  padding: auto 20px;
+  width: 300px;
+  z-index: 9999999;
+  position: sticky;
 }
 .right-paddle {
 	right: 0;

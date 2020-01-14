@@ -4,9 +4,8 @@
         <button @click="scroll_left" class="left-paddle paddle hidden">
           <img src="https://image.flaticon.com/icons/svg/271/271220.svg" height="40" width="40" alt="">
         </button>
-      <Select />
-      <Select />
-        <Card :cardMode="card-dark"/>
+        <Select />
+        <Card/>
         <Card />
         <Card />
         <Card />
@@ -49,21 +48,10 @@ export default {
     Select,
     Toggle
   },
-  // mounted () {
-  //   let content = document.querySelector(".scrolling-wrapper");
-  // },
   created () {
     window.addEventListener('keyup', this.keyPress)
   },
-  mounted () {
-    window.addEventListener('scroll', this.onScoll)
-  },
   methods: {
-    onScroll (event) {
-      let content = document.querySelector(".scrolling-wrapper");
-      console.log(content.scrollLeft)
-      console.log(event + 'e')
-    },
     keyPress (e) {
       if (e.key === 't') {
         this.toggle()
@@ -71,7 +59,7 @@ export default {
     },
     scroll_left () {
       let content = document.querySelector(".scrolling-wrapper");
-      content.scrollLeft -= 50;
+      content.scrollLeft -= 700;
       if (content.scrollLeft == 0) {
         document.querySelector(".left-paddle").classList.add('hidden')
       } else{
@@ -80,13 +68,13 @@ export default {
     },
     scroll_right () {
       let content = document.querySelector(".scrolling-wrapper");
-      content.scrollLeft += 50;
-      if(content.scrollLeft > 0) {
+      content.scrollLeft += 700;
+      console.log(content.scrollLeft)
+      if(content.scrollLeft == 0 || content.scrollLeft > 0) {
         document.querySelector(".left-paddle").classList.remove('hidden')
       } else {
         document.querySelector(".left-paddle").classList.add('hidden');
       }
-      console.log(content.scrollLeft)
     },
     toggle () {
       if (this.mode === "dark") {
@@ -100,15 +88,17 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap');
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', 'sans-serif';
+  font-family: 'Roboto Condensed', 'sans-serif';
 }
 .app {
   width: 100vw;
   min-height: 100vh;
+  line-height: 20px;
   background: #f3f3f3;
   color: #152020;
   transition: background 0.3s ease-in-out;
@@ -120,9 +110,11 @@ export default {
 .scrolling-wrapper {
   display: flex;
   overflow: auto;
-  height: 150px;
+  height: 120px;
   position: relative;
   -webkit-overflow-scrolling: touch;
+  transition: transform .4s ease-in;
+  scroll-behavior: smooth;
 }
 ::-webkit-scrollbar {
     width: 0px;

@@ -19,7 +19,7 @@
   font-family: Arial;
 }
 .custom-select select {
-    padding: 5px 8px;
+    padding: 4px 8px;
     border: none;
     box-shadow: none;
     background: transparent;

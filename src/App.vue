@@ -109,14 +109,20 @@ export default {
 }
 .scrolling-wrapper {
   display: flex;
-  overflow: auto;
+  overflow: hidden;
   height: 120px;
   position: relative;
   -webkit-overflow-scrolling: touch;
   transition: transform .4s ease-in;
   scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+}
+::-moz-appearance {
     width: 0px;
     background: transparent; /* make scrollbar transparent */
 }

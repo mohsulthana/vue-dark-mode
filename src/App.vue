@@ -31,9 +31,9 @@
 </template>
 
 <script>
-import Card from "@/components/Card";
-import Select from "@/components/Select";
-import Toggle from '@/components/Toggle';
+import Card from './components/Card.vue';
+import Select from './components/Select.vue';
+import Toggle from './components/Toggle.vue';
 
 
 export default {
@@ -50,6 +50,9 @@ export default {
   },
   created () {
     window.addEventListener('keyup', this.keyPress)
+  },
+  beforeUnmount () {
+    window.removeEventListener('keyup', this.keyPress)
   },
   methods: {
     keyPress (e) {
